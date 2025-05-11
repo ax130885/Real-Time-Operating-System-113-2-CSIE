@@ -1,4 +1,4 @@
-<!-- title: NTU IM Operating-System HW 02 -->
+<!-- title: NTU CSIE Operating-System HW 02 -->
 ---
 Student ID: R12631070  
 Name: 林育新  
@@ -118,3 +118,11 @@ sudo chrt --deadline --sched-runtime 500000 --sched-deadline 800000 --sched-peri
 
 ## dmesg
 ![alt text](figure/image-14.png)
+
+# 觀察與原因
+- CFS 不是即時排程，解壓縮僅有大概一半的速度，導致輕微掉幀與聲音撕裂。
+- FIFO 與 RR 雖然解壓縮速度看起來很高，但會讓整個系統變的超級卡，連使用 GUI 切換視窗都卡。因為這種排程方式是非搶占式，系統或IO的重要工作，無法搶占資源，導致使用者體感很差。
+- EDF 的解壓縮速度幾乎完全受到runtime/period的比例影響，deadline怎麼設，體感好像感受不大。
+  - 增加 run time: 因為分子提升，系統分配給解壓縮的時間變多，因此速度提升。
+  - 縮短 deadline: 優先級提升，但可能是因為性能溢出，所以沒甚麼感覺。
+  - 增加 period: 因為分母增加，導致系統分配給解壓縮的時間更少，解壓縮速度更慢。
