@@ -5,13 +5,10 @@ Name: 林育新
 ---
 
 # 執行環境
-環境建置與測試指令請見`rtos.sh`
+內核修改與安裝過程請見`rtos.sh`
 - CPU 核心數量: 1  
 - CPU 型號: 12th Gen Intel(R) Core(TM) i5-12400  
 - RAM: 4GB
-
-# 內核修改與安裝過程
-請見另一份文件 `rtos.sh`
 
 ## 執行指令
 ```bash
